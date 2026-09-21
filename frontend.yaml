@@ -32,8 +32,10 @@ spec:
       labels:
         service: front
     spec:
+      imagePulSecrets:
+        - name: dockerhub-secret
       containers:
       - name: front-pod
-        image: 3omar0/mates-front:latest 
+        image: 3omar0/mates-front:v0.0.0
         ports:
         - containerPort: 80

@@ -1,38 +1,40 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-service
+  name: backend
   namespace: mates-app
   labels:
-    service: users
+    service: backend
 spec:
   ports:
     - port: 8000
   selector:
-    service: users
+    service: backend
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-deployment
+  name: backend
   namespace: mates-app
   labels:
-    service: users
+    service: backend
 spec:
   replicas: 1
   selector: 
     matchLabels: 
-      service: users
+      service: backend
   template:
     metadata:
       labels:
-        service: users
+        service: backend
     spec:
+      imagePulSecrets:
+        - name: dockerhub-secret
       containers:
-      - name: users-pod
-        image: 3omar0/mates-users:v1.0
+      - name: backend
+        image: 3omar0/mates:v0.0.0
         ports:
         - containerPort: 8000
         env:
@@ -71,9 +73,3 @@ spec:
               secretKeyRef:
                   name: users-secret
                   key: db_port
-
-      initContainers:
-      - name: celery-pod
-        image: 3omar0/mates-users:v1.0
-        command: ["celery"]
-        args: ["-A", "users", "worker", "-l", "info"]
