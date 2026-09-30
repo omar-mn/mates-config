@@ -23,7 +23,7 @@ metadata:
     service: front
 
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       service: front

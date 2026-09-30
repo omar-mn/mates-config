@@ -39,18 +39,23 @@ spec:
     - mates.kube.local
 
   rules:
-    - matches:
+    - backendRefs:
+        - kind: Service
+          name: front-service
+          port: 80
+      matches:
         - path:
             type: PathPrefix
             value: /
-      backendRefs:
-        - name: front-service
-          port: 80
 
-    - matches:
+    - backendRefs:
+        - kind: Service
+          name: backend
+          port: 8000
+      matches:
         - path:
             type: PathPrefix
-            value: /api/auth/
-      backendRefs:
-        - name: users-service
-          port: 8000
+            value: /api
+        - path:
+            type: PathPrefix
+            value: /ws
