@@ -34,7 +34,7 @@ spec:
         - name: dockerhub-secret
       containers:
       - name: backend
-        image: 3omar0/mates:v0.1.0
+        image: 3omar0/mates:dev-a1d71de
         ports:
         - containerPort: 8000
         env:
