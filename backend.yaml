@@ -21,7 +21,7 @@ metadata:
   labels:
     service: backend
 spec:
-  replicas: 4
+  replicas: 6
   selector: 
     matchLabels: 
       service: backend
