@@ -53,3 +53,8 @@ spec:
 
         ports:
         - containerPort: 5432
+
+        volumes:
+        - name: users-vol
+          persistentVolumeClaim:
+            claimName: postgres
